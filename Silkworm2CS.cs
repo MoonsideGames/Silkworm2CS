@@ -40,38 +40,43 @@ namespace Silkworm2CS
 		[StructLayout(LayoutKind.Sequential)]
 		public struct NodeCreateInfo
 		{
-			int X;
-			int Y;
-			float Mass;
-			float Friction;
-			float Radius;
-			bool Pinned;
-			float PushFactor;
-			float WindFactor;
-			bool Destroyable;
+			public float X;
+			public float Y;
+			public float Mass;
+			public float Friction;
+			public float Radius;
+			public bool Pinned;
+			public float PushFactor;
+			public float WindFactor;
+			public bool Destroyable;
 		};
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct ClothCreateInfo
 		{
-			int X;
-			int Y;
-			int HorizontalNodeCount;
-			int VerticalNodeCount;
-			float Mass;
-			float Friction;
-			float WindFactor;
-			float TearThreshold;
+			public float X;
+			public float Y;
+			public float Z;
+			public int HorizontalNodeCount;
+			public int VerticalNodeCount;
+			public float Mass;
+			public float Friction;
+			public float WindFactor;
+			public float TearThreshold;
+			public float LeftUV;
+			public float TopUV;
+			public float RightUV;
+			public float BottomUV;
 		};
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct Vertex
 		{
-			float X;
-			float Y;
-			float Z;
-			float U;
-			float V;
+			public float X;
+			public float Y;
+			public float Z;
+			public float U;
+			public float V;
 		}
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
@@ -85,7 +90,7 @@ namespace Silkworm2CS
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern IntPtr Silkworm_CreateNode(NodeCreateInfo* nodeCreateInfo);
+		public unsafe static extern IntPtr Silkworm_CreateNode(in NodeCreateInfo nodeCreateInfo);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void Silkworm_DestroyNode(IntPtr nodePtr);
@@ -99,7 +104,7 @@ namespace Silkworm2CS
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern IntPtr Silkworm_ClothCreate(ClothCreateInfo* clothCreateInfo);
+		public unsafe static extern IntPtr Silkworm_ClothCreate(in ClothCreateInfo clothCreateInfo);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public unsafe static extern void Silkworm_ClothNodePin(IntPtr clothPtr, uint i, uint j);
@@ -111,14 +116,9 @@ namespace Silkworm2CS
 		public unsafe static extern void Silkworm_ClothNodeDestroy(IntPtr clothPtr, uint i, uint j);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern int Silkworm_ClothFillTriangleBuffer(
-			IntPtr clothPtr,
-			IntPtr vertexBufferPtr,
-			float depth,
-			float leftUV,
-			float widthUV,
-			float topUV,
-			float heightUV
+		public unsafe static extern uint Silkworm_ClothRender(
+			out IntPtr vertexBufferPointer,
+			out uint vertexBufferLengthInBytes
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
