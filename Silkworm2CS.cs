@@ -69,6 +69,14 @@ namespace Silkworm2CS
 			public float BottomUV;
 		};
 
+		public struct Rectangle
+		{
+			public float X;
+			public float Y;
+			public float W;
+			public float H;
+		}
+
 		[StructLayout(LayoutKind.Sequential)]
 		public struct Vertex
 		{
@@ -141,6 +149,9 @@ namespace Silkworm2CS
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public unsafe static extern void Silkworm_DestroyNodesInRadius(float x, float y, float radius);
+
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public unsafe static extern void Silkworm_DestroyNodesInRectangle(in Rectangle rectangle);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public unsafe static extern IntPtr Silkworm_FindClothInRadius(float x, float y, float radius);
