@@ -45,10 +45,10 @@ namespace Silkworm2CS
 			public float Mass;
 			public float Friction;
 			public float Radius;
-			public bool Pinned;
+			public byte Pinned;
 			public float PushFactor;
 			public float WindFactor;
-			public bool Destroyable;
+			public byte Destroyable;
 		};
 
 		[StructLayout(LayoutKind.Sequential)]
@@ -98,7 +98,7 @@ namespace Silkworm2CS
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern IntPtr Silkworm_CreateNode(in NodeCreateInfo nodeCreateInfo);
+		public static extern IntPtr Silkworm_CreateNode(in NodeCreateInfo nodeCreateInfo);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void Silkworm_DestroyNode(IntPtr nodePtr);
@@ -112,34 +112,34 @@ namespace Silkworm2CS
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern IntPtr Silkworm_ClothCreate(in ClothCreateInfo clothCreateInfo);
+		public static extern IntPtr Silkworm_ClothCreate(in ClothCreateInfo clothCreateInfo);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_ClothNodePin(IntPtr clothPtr, uint i, uint j);
+		public static extern void Silkworm_ClothNodePin(IntPtr clothPtr, uint i, uint j);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_ClothNodeUnpin(IntPtr clothPtr, uint i, uint j);
+		public static extern void Silkworm_ClothNodeUnpin(IntPtr clothPtr, uint i, uint j);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_ClothNodeDestroy(IntPtr clothPtr, uint i, uint j);
+		public static extern void Silkworm_ClothNodeDestroy(IntPtr clothPtr, uint i, uint j);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern uint Silkworm_ClothRender(
+		public static extern uint Silkworm_ClothRender(
 			out IntPtr vertexBufferPointer,
 			out uint vertexBufferLengthInBytes
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_ClothDestroy(IntPtr clothPtr);
+		public static extern void Silkworm_ClothDestroy(IntPtr clothPtr);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_PinNodesInRadius(float x, float y, float radius);
+		public static extern void Silkworm_PinNodesInRadius(float x, float y, float radius);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_UnpinNodesInRadius(float x, float y, float radius);
+		public static extern void Silkworm_UnpinNodesInRadius(float x, float y, float radius);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_PushNodesInRadius(
+		public static extern void Silkworm_PushNodesInRadius(
 			float x,
 			float y,
 			float radius,
@@ -148,21 +148,27 @@ namespace Silkworm2CS
 		);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_DestroyNodesInRadius(float x, float y, float radius);
+		public static extern void Silkworm_DestroyNodesInRadius(float x, float y, float radius);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_DestroyNodesInRectangle(in Rectangle rectangle);
+		public static extern void Silkworm_DestroyNodesInRectangle(in Rectangle rectangle);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern IntPtr Silkworm_FindClothInRadius(float x, float y, float radius);
+		public static extern uint Silkworm_DestroyedNodeCount();
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_PerformDestroys();
+		public static extern uint Silkworm_DestroyedLinkCount();
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_ClearAll();
+		public static extern IntPtr Silkworm_FindClothInRadius(float x, float y, float radius);
 
 		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
-		public unsafe static extern void Silkworm_Finish();
+		public static extern void Silkworm_PerformDestroys();
+
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void Silkworm_ClearAll();
+
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void Silkworm_Finish();
 	}
 }
